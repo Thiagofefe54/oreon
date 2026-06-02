@@ -3,11 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
 import os
+from voice import falar
 
 load_dotenv()
 
 app = FastAPI()
+executor = ThreadPoolExecutor()
 
 app.add_middleware(
     CORSMiddleware,
@@ -45,8 +49,17 @@ async def chat(msg: Mensagem):
     texto_resposta = resposta.choices[0].message.content
     historico.append({"role": "assistant", "content": texto_resposta})
     
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(executor, falar, texto_resposta)
+    
     return {"resposta": texto_resposta}
 
 @app.get("/status")
 async def status():
     return {"status": "online"}
+
+@app.post("/falar")
+async def falar_rota(msg: Mensagem):
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(executor, falar, msg.texto)
+    return {"status": "ok"}
