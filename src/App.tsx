@@ -23,18 +23,25 @@ function App() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  function sendMessage() {
+    async function sendMessage() {
     if (!input.trim()) return;
     const time = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-    setMessages((prev) => [...prev, { role: "user", text: input, time }]);
+    const texto = input;
+    setMessages((prev) => [...prev, { role: "user", text: texto, time }]);
     setInput("");
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { role: "oreon", text: "Processando... (backend não conectado ainda)", time },
-      ]);
-    }, 800);
-  }
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texto }),
+      });
+      const data = await res.json();
+      setMessages((prev) => [...prev, { role: "oreon", text: data.resposta, time }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "oreon", text: "Erro ao conectar com o backend.", time }]);
+    }
+    }
 
   return (
     <div className="app">
