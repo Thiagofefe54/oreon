@@ -1,0 +1,47 @@
+# Dependencies
+
+node_modules/
+**/node_modules/
+
+# Python cache
+
+**pycache**/
+**/**pycache**/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables / secrets
+
+.env
+.env.*
+!.env.example
+
+# Tauri / Rust build artifacts
+
+frontend/src-tauri/target/
+**/target/
+frontend/src-tauri/gen/
+**/src-tauri/target/
+
+# Vite / frontend build
+
+frontend/dist/
+frontend/.vite/
+
+# Logs
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE / OS
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
