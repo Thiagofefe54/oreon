@@ -45,3 +45,8 @@ pnpm-debug.log*
 Thumbs.db
 *.swp
 *.swo
+
+
+#memory
+
+backend/memory/memory.json
