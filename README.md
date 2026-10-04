@@ -1,260 +1,72 @@
-\# 🤖 OREON — Your Personal AI Assistant
+# OREON
 
+Protótipo de assistente de desktop com inteligência artificial.
 
+![Status](https://img.shields.io/badge/status-n%C3%A3o%20finalizado-orange?style=flat-square)
 
-> An intelligent desktop assistant with voice, computer vision, automation, and financial integration. Built from scratch by a 16-year-old developer.
+**Tecnologias:** React · TypeScript · Tauri · Python · FastAPI · Groq
 
+## Proposta e estado atual
 
+A proposta é evoluir para um assistente com conversa, voz, memória e automações. **O projeto ainda não está finalizado.** Hoje há chat por texto, integração Groq e histórico local em JSON. Voz, visão, controle do computador e integrações externas são planos futuros. O endpoint de voz ainda não implementa reconhecimento de áudio.
 
-\---
+## Estrutura
 
+- `frontend/`: interface React e estrutura do aplicativo Tauri.
+- `backend/main.py`: API de chat.
+- `backend/core/`: cliente de IA.
+- `backend/memory/`: histórico da conversa.
+- `backend/voice/`: espaço reservado para voz.
 
+## Backend
 
-\## 🧠 What is OREON?
+Use Python 3.10 ou superior.
 
-
-
-OREON is a personal desktop assistant that combines multiple AI models to deliver a complete automation experience. It listens to your voice, sees your screen, controls your computer, analyzes the crypto market, and much more — all running locally on your PC.
-
-
-
-\---
-
-
-
-\## ⚡ Features
-
-
-
-\### v1 — Core
-
-\- 💬 Real-time text and voice chat
-
-\- 🧠 Persistent memory (remembers you across sessions)
-
-\- 👨‍💻 Coding assistant — writes, explains, and debugs code
-
-
-
-\### v2 — PC Control
-
-\- 🖥️ Computer vision — analyzes your screen in real time
-
-\- 📂 Opens, closes, and organizes programs and files
-
-\- 📊 Monitors CPU, RAM, and temperature
-
-
-
-\### v3 — Integrations
-
-\- 🎵 Voice-controlled Spotify
-
-\- 📈 Binance API — real-time prices and AI-powered market prediction
-
-\- 🔔 Custom crypto alerts
-
-
-
-\### v4 — Polish
-
-\- 🌅 Daily briefing on PC startup
-
-\- 🎯 Focus mode — blocks distractions
-
-\- 🔗 GitHub integration
-
-\- 🎮 Streamer mode (OBS)
-
-
-
-\---
-
-
-
-\## 🛠️ Tech Stack
-
-
-
-| Layer | Technology |
-
-|---|---|
-
-| Interface | Tauri + React + TypeScript |
-
-| Backend | Python |
-
-| Main AI | Groq API |
-
-| Computer Vision | Google Gemini |
-
-| Speech Recognition | Whisper |
-
-| Voice Synthesis | ElevenLabs |
-
-| Local Model (optional) | Ollama |
-
-| Crypto | Binance API |
-
-
-
-\---
-
-
-
-\## 🗂️ Project Structure
-
-
-
-```
-
-oreon/
-
-├── frontend/          # Tauri + React interface
-
-│   ├── src/
-
-│   │   ├── components/
-
-│   │   └── App.tsx
-
-├── backend/           # Python
-
-│   ├── core/          # Main AI logic
-
-│   ├── memory/        # Persistent memory system
-
-│   ├── voice/         # Voice input and output
-
-│   ├── vision/        # Computer vision
-
-│   ├── integrations/  # Spotify, Binance, GitHub
-
-│   └── main.py
-
-├── memory/            # Local memory files
-
-└── README.md
-
-```
-
-
-
-\---
-
-
-
-\## 🚀 Getting Started
-
-
-
-```bash
-
-\# Clone the repository
-
-git clone https://github.com/Thiagofeje54/oreon.git
-
+```sh
+git clone https://github.com/Thiagofefe54/oreon.git
 cd oreon
+python -m venv .venv
+```
 
+Ative o ambiente: no PowerShell use `.\.venv\Scripts\Activate.ps1`; no Linux/macOS, `source .venv/bin/activate`.
 
+```sh
+pip install -r backend/requirements.txt
+```
 
-\# Backend
+Copie `.env.example` para `.env` na raiz e preencha `GROQ_API_KEY`. Depois, a partir da raiz:
 
-pip install -r requirements.txt
-
+```sh
 python backend/main.py
+```
 
+A API local fica em http://localhost:8000 e sua documentação em http://localhost:8000/docs. O processamento de IA depende da API externa Groq.
 
+## Interface
 
-\# Frontend (another terminal)
+Em outro terminal, use Node.js compatível com Vite 8 (20.19+ ou 22.12+) e npm:
 
+```sh
 cd frontend
-
-npm install
-
-npm run tauri dev
-
+npm ci
+npm run dev
 ```
 
+O endereço de desenvolvimento é http://localhost:1420. Para desktop, instale também os pré-requisitos de Rust/Tauri da sua plataforma e execute `npm run tauri dev`. A interface não inicia o backend automaticamente.
 
+## Memória e limitações
 
-\---
+O histórico é salvo em `backend/memory/memory.json` e não deve ser publicado. É compartilhado pelo processo local; ainda falta isolamento de usuários e controle de concorrência. A API não implementa autenticação.
 
+## Próximos passos
 
+- [ ] Implementar voz e resposta em áudio.
+- [ ] Melhorar recuperação de falhas e indicação de conexão.
+- [ ] Proteger e organizar a memória.
+- [ ] Integrar inicialização do backend ao aplicativo desktop.
+- [ ] Implementar visão, automações e demais integrações planejadas.
+- [ ] Validar instalação e empacotamento em cada plataforma.
 
-\## 🔑 Environment Variables
+---
 
-
-
-Create a `.env` file at the root:
-
-
-
-```env
-
-GROQ\_API\_KEY=your\_key
-
-GEMINI\_API\_KEY=your\_key
-
-ELEVENLABS\_API\_KEY=your\_key
-
-BINANCE\_API\_KEY=your\_key
-
-BINANCE\_SECRET\_KEY=your\_key
-
-```
-
-
-
-\---
-
-
-
-\## 🗺️ Roadmap
-
-
-
-\- \[x] Planning and architecture
-
-\- \[ ] v1 — Chat + voice + memory
-
-\- \[ ] v2 — Vision + PC control
-
-\- \[ ] v3 — Spotify + Binance
-
-\- \[ ] v4 — Final polish
-
-
-
-\---
-
-
-
-\## 👤 Author
-
-
-
-\*\*Thiago — DevFeijó\*\*
-
-Full-Stack + AI Developer | 16 y/o | São Paulo, Brazil
-
-
-
-\[!\[LinkedIn](https://img.shields.io/badge/LinkedIn-DevFeijó-blue)](https://linkedin.com/in/seu-perfil)
-
-\[!\[GitHub](https://img.shields.io/badge/GitHub-Thiagofeje54-black)](https://github.com/Thiagofeje54)
-
-
-
-\---
-
-
-
-\## 📄 License
-
-
-
-MIT License — see \[LICENSE](LICENSE) for details.
-
-
-
+Projeto de [Thiago Feijó](https://github.com/Thiagofefe54).

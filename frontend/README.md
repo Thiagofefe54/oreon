@@ -1,7 +1,7 @@
-# Tauri + React + Typescript
+# Interface do OREON
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+Interface React/TypeScript com estrutura Tauri. O aplicativo ainda está em desenvolvimento e requer o backend Python iniciado separadamente.
 
-## Recommended IDE Setup
+Consulte o [README principal](../README.md) para configuração, execução e pendências.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Comandos nesta pasta: `npm ci`, `npm run dev`, `npm run build` e `npm run tauri dev` (com os pré-requisitos Tauri instalados).
